@@ -45,12 +45,12 @@ get '/' do
   ## Block unauthorized domains from accessing ##
   ## This means that any referral (link clicks) that don't come from the domain are denied) ##
   ## Only requests themselves (IE NOT referrers) from the domain will be accepted ##
-  halt 401, 'Unauthorized' unless request.host == domain && ENV[:debug]
+  halt 401, 'Unauthorized Domain' unless request.host == domain && !ENV[:debug]
 
   ## Params ##
   ## Only allow processes with certain params ##
   ## This further protects the core functionality of the app ##
-  halt 401, 'Unauthorized' unless params && params.has_key?('email')
+  halt 401, 'Unauthorized PArams' unless params && params.has_key?('email')
 
   ## Create customer ##
   ## This allows us to create a new customer and pass their details back to the front-end JS ##
