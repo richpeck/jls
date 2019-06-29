@@ -59,7 +59,8 @@ error Bigcommerce::BadRequest do
   test = OpenStruct.new message.first
   #test.status.to_s
   #test.message
-  test.details.inspect()
+  test2 = OpenStruct.new test.details
+  test2.invalid_reason
 end
 
 ##########################################################
