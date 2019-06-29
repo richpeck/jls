@@ -35,6 +35,55 @@ end
 
 ##########################################################
 ##########################################################
+##                  _     _ _                           ##
+##                 | |   (_) |                          ##
+##                 | |    _| |__  ___                   ##
+##                 | |   | | '_ \/ __|                  ##
+##                 | |___| | |_) \__ \                  ##
+##                 \_____/_|_.__/|___/                  ##
+##                                                      ##
+##########################################################
+##########################################################
+
+## Exception Management ##
+## Allows us to capture the errors raised by BC ##
+## https://github.com/bigcommerce/bigcommerce-api-ruby/blob/master/examples/exception_handling.rb ##
+def bc_handle_exception
+  yield
+rescue Bigcommerce::BadRequest => e
+  puts e.inspect
+rescue Bigcommerce::Unauthorized => e
+  puts e.inspect
+rescue Bigcommerce::Forbidden => e
+  puts e.inspect
+rescue Bigcommerce::NotFound => e
+  puts e.inspect
+rescue Bigcommerce::MethodNotAllowed => e
+  puts e.inspect
+rescue Bigcommerce::NotAccepted => e
+  puts e.inspect
+rescue Bigcommerce::TimeOut => e
+  puts e.inspect
+rescue Bigcommerce::ResourceConflict => e
+  puts e.inspect
+rescue Bigcommerce::TooManyRequests => e
+  puts e.inspect
+rescue Bigcommerce::InternalServerError => e
+  puts e.inspect
+rescue Bigcommerce::BadGateway => e
+  puts e.inspect
+rescue Bigcommerce::ServiceUnavailable => e
+  puts e.inspect
+rescue Bigcommerce::GatewayTimeout => e
+  puts e.inspect
+rescue Bigcommerce::BandwidthLimitExceeded => e
+  puts e.inspect
+rescue StandardError => e
+  puts "Some other Error #{e.inspect}"
+end
+
+##########################################################
+##########################################################
 
 ## Actions ##
 ## This allows us to accept inbound requests from the Internet ##
@@ -60,14 +109,8 @@ get '/' do
 
   ## Create customer ##
   ## This allows us to create a new customer and pass their details back to the front-end JS ##
-  begin
-    @customer = Bigcommerce::Customer.create(
-      first_name: 'Karl',
-      last_name: 'The Frog',
-      email: "eab284fbd0@example.com"
-    )
-  rescue => e
-      return e.inspect()
+  bc_handle_exception do
+    @customer = Bigcommerce::Customer.create(first_name: 'Karl', last_name: 'The Frog', email: "eab284fbd0@example.com")
   end
 
   @customer.inspect()
