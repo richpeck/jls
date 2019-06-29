@@ -45,7 +45,7 @@ get '/' do
   ## Block unauthorized domains from accessing ##
   ## This means that any referral (link clicks) that don't come from the domain are denied) ##
   ## Only requests themselves (IE NOT referrers) from the domain will be accepted ##
-  halt 401, 'Unauthorized' unless request.host == domain && !ENV[:debug]
+  halt 401, 'Unauthorized' unless request.host == domain && ENV[:debug]
 
   ## Params ##
   ## Only allow processes with certain params ##
