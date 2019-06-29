@@ -66,8 +66,8 @@ get '/' do
       last_name: 'The Frog',
       email: "eab284fbd0@example.com"
     )
-  rescue
-      return "Error"
+  rescue => e
+      return e
   end
 
   @customer.inspect()
