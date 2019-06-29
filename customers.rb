@@ -90,7 +90,7 @@ end
 ## Obviously, we also have to balance it against the
 get '/' do
 
-  return defined?(ENV["DEBUG"])
+  return ENV["DEBUG"]
 
   ## Debug ##
   ## Allows us to test and get responses without data ##
