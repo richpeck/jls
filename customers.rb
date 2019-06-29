@@ -55,12 +55,14 @@ end
 
 ## Exception Handling ##
 error Bigcommerce::BadRequest do
+
+  ## Data ##
   message = JSON.parse(env['sinatra.error'].message.to_s)
   message = message.first
 
-  status message["status"]
-  test2 = OpenStruct.new message["details"]
-  test2.invalid_reason
+  ## Response ##
+  status message["status"] ## Status
+  message["message"] ## Message
 end
 
 ##########################################################
