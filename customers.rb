@@ -52,8 +52,8 @@ set :show_exceptions, true if debug
 
 def bc_handle_exception
   yield
-rescue
-  halt 401, 'error'
+rescue => error
+  halt 401, error.inspect()
 end
 
 ##########################################################
