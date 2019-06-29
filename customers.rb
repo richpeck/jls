@@ -90,7 +90,7 @@ end
 ## Obviously, we also have to balance it against the
 get '/' do
 
-  return ENV.fetch("DEBUG") { false }
+  return ENV.fetch("DEBUG") { "false" }
 
   ## Debug ##
   ## Allows us to test and get responses without data ##
