@@ -41,16 +41,22 @@ end
 ## Obviously, we also have to balance it against the
 get '/' do
 
-  ## Request ##
-  ## Block unauthorized domains from accessing ##
-  ## This means that any referral (link clicks) that don't come from the domain are denied) ##
-  ## Only requests themselves (IE NOT referrers) from the domain will be accepted ##
-  (halt 401, 'Unauthorized Domain' unless request.host == domain) unless ENV["DEBUG"]
+  ## Debug ##
+  ## Allows us to test and get responses without data ##
+  if !ENV["debug"]
 
-  ## Params ##
-  ## Only allow processes with certain params ##
-  ## This further protects the core functionality of the app ##
-  halt 401, 'Unauthorized PArams' unless params && params.has_key?('email')
+    ## Request ##
+    ## Block unauthorized domains from accessing ##
+    ## This means that any referral (link clicks) that don't come from the domain are denied) ##
+    ## Only requests themselves (IE NOT referrers) from the domain will be accepted ##
+    halt 401, 'Unauthorized Domain' unless request.host == domain
+
+    ## Params ##
+    ## Only allow processes with certain params ##
+    ## This further protects the core functionality of the app ##
+    halt 401, 'Unauthorized PArams' unless params && params.has_key?('email')
+
+  end ## debug
 
   ## Create customer ##
   ## This allows us to create a new customer and pass their details back to the front-end JS ##
