@@ -92,7 +92,7 @@ get '/' do
 
   ## Debug ##
   ## Allows us to test and get responses without data ##
-  if ENV.fetch("DEBUG", false)
+  if ENV.fetch("DEBUG", false) == false
 
     return "DEBUG does not exist"
 
