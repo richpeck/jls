@@ -18,6 +18,9 @@ require 'sinatra/respond_to'
 require 'bigcommerce'
 require 'securerandom'
 
+## Extra ##
+require "ostruct"
+
 ##########################################################
 ##########################################################
 
@@ -52,8 +55,8 @@ end
 
 ## Exception Handling ##
 error Bigcommerce::BadRequest do
-  message = JSON.parse(env['sinatra.error'].message)
-  message.first.has_key?("status")
+  message = Openstruct.new JSON.parse(env['sinatra.error'].message.to_s)
+  message.inspect()
 end
 
 ##########################################################
