@@ -51,33 +51,33 @@ end
 def bc_handle_exception
   yield
 rescue Bigcommerce::BadRequest => e
-  return e.inspect
+  return @customer = e
 rescue Bigcommerce::Unauthorized => e
-  return e.inspect
+  return @customer = e
 rescue Bigcommerce::Forbidden => e
-  return e.inspect
+  return @customer = e
 rescue Bigcommerce::NotFound => e
-  return e.inspect
+  return @customer = e
 rescue Bigcommerce::MethodNotAllowed => e
-  return e.inspect
+  return @customer = e
 rescue Bigcommerce::NotAccepted => e
-  return e.inspect
+  return @customer = e
 rescue Bigcommerce::TimeOut => e
-  return e.inspect
+  return @customer = e
 rescue Bigcommerce::ResourceConflict => e
-  return e.inspect
+  return @customer = e
 rescue Bigcommerce::TooManyRequests => e
-  return e.inspect
+  return @customer = e
 rescue Bigcommerce::InternalServerError => e
-  return e.inspect
+  return @customer = e
 rescue Bigcommerce::BadGateway => e
-  return e.inspect
+  return @customer = e
 rescue Bigcommerce::ServiceUnavailable => e
-  return e.inspect
+  return @customer = e
 rescue Bigcommerce::GatewayTimeout => e
-  return e.inspect
+  return @customer = e
 rescue Bigcommerce::BandwidthLimitExceeded => e
-  return e.inspect
+  return @customer = e
 rescue StandardError => e
   return "Some other Error #{e.inspect}"
 end
@@ -92,7 +92,7 @@ get '/' do
 
   ## Debug ##
   ## Allows us to test and get responses without data ##
-  if ENV.fetch("DEBUG", false) == false || ENV.fetch("DEBUG", false) == "false" ## this needs to be evaluated this way because each ENV variable returns a string ##
+  if ENV.fetch("DEBUG", false) == false ## this needs to be evaluated this way because each ENV variable returns a string ##
 
     ## Request ##
     ## Block unauthorized domains from accessing ##
