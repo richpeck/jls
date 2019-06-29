@@ -27,10 +27,10 @@ domain = "jlsmobility.co.uk"
 ## Config ##
 ## Allows us to configure the BigCommerce plugin to use the appropriate store data ##
 Bigcommerce.configure do |config|
-  config.store_hash    = ENV["STORE_HASH"]
-  config.client_id     = ENV["CLIENT_ID"]
-  config.client_secret = ENV["CLIENT_SECRET"]
-  config.access_token  = ENV["CLIENT_TOKEN"]
+  config.store_hash    = ENV.fetch("STORE_HASH")
+  config.client_id     = ENV.fetch("CLIENT_ID")
+  config.client_secret = ENV.fetch("CLIENT_SECRET")
+  config.access_token  = ENV.fetch("ACCESS_TOKEN")
 end
 
 ##########################################################
