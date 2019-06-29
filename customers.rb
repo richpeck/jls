@@ -92,7 +92,7 @@ get '/' do
 
   ## Debug ##
   ## Allows us to test and get responses without data ##
-  if ENV.fetch("DEBUG", false) == false ## this needs to be evaluated this way because each ENV variable returns a string ##
+  if ENV.fetch("DEBUG", false) == false || ENV.fetch("DEBUG", false) == "false" ## this needs to be evaluated this way because each ENV variable returns a string ##
 
     ## Request ##
     ## Block unauthorized domains from accessing ##
