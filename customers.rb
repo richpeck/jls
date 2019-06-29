@@ -90,7 +90,7 @@ end
 ## Obviously, we also have to balance it against the
 get '/' do
 
-  return ENV["DEBUG"].presence
+  return ENV.has_key? "DEBUG"
 
   ## Debug ##
   ## Allows us to test and get responses without data ##
