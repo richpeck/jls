@@ -92,7 +92,7 @@ get '/' do
 
   ## Debug ##
   ## Allows us to test and get responses without data ##
-  unless defined?(ENV["DEBUG"]) && ENV["DEBUG"] != false
+  unless defined? ENV["DEBUG"] 
 
     ## Request ##
     ## Block unauthorized domains from accessing ##
