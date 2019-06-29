@@ -63,7 +63,7 @@ get '/' do
   @customer = Bigcommerce::Customer.create(
     first_name: 'Karl',
     last_name: 'The Frog',
-    email: "#{SecureRandom.hex(5)}@example.com"
+    email: "eab284fbd0@example.com"
   )
 
   @customer.inspect()
