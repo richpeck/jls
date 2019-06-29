@@ -56,9 +56,7 @@ end
 ## Exception Handling ##
 error Bigcommerce::BadRequest do
   message = OpenStruct.new JSON.parse(env['sinatra.error'].message.to_s)
-  message.each do |x|
-    x.inspect()
-  end
+  message.first.inspect()
 end
 
 ##########################################################
