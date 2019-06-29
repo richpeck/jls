@@ -30,6 +30,7 @@ Sinatra::Application.register Sinatra::RespondTo
 ## Definitions ##
 ## Any variables defined here ##
 domain = "jlsmobility.co.uk"
+debug  = ENV.fetch("DEBUG", false) == false
 
 ## Config ##
 ## Allows us to configure the BigCommerce plugin to use the appropriate store data ##
@@ -41,7 +42,7 @@ Bigcommerce.configure do |config|
 end
 
 ## Options ##
-set :show_exceptions, true
+set :show_exceptions, true if debug
 
 ##########################################################
 ##########################################################
@@ -62,7 +63,7 @@ get '/' do
 
   ## Debug ##
   ## Allows us to test and get responses without data ##
-  if ENV.fetch("DEBUG", false) == false ## this needs to be evaluated this way because each ENV variable returns a string ##
+  if debug ## this needs to be evaluated this way because each ENV variable returns a string ##
 
     ## Request ##
     ## Block unauthorized domains from accessing ##
