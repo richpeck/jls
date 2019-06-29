@@ -91,9 +91,7 @@ get '/' do
 
   ## Create customer ##
   ## This allows us to create a new customer and pass their details back to the front-end JS ##
-  bc_handle_exception do
-    @customer = Bigcommerce::Customer.create(first_name: 'Karl', last_name: 'The Frog', email: "eab284fbd0@example.com")
-  end
+  @customer = Bigcommerce::Customer.create(first_name: 'Karl', last_name: 'The Frog', email: "eab284fbd0@example.com")
 
   ## Response ##
   ## Only respond to JS (unless in debug mode) ##
