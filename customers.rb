@@ -40,6 +40,9 @@ Bigcommerce.configure do |config|
   config.access_token  = ENV.fetch("ACCESS_TOKEN")
 end
 
+## Options ##
+set :show_exceptions, true
+
 ##########################################################
 ##########################################################
 ##                  _     _ _                           ##
