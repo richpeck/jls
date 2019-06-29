@@ -92,9 +92,7 @@ get '/' do
 
   ## Debug ##
   ## Allows us to test and get responses without data ##
-  if ENV.fetch("DEBUG", false) == false
-
-    return "DEBUG does not exist"
+  if ENV.fetch("DEBUG", false) == false ## this needs to be evaluated this way because each ENV variable returns a string ##
 
     ## Request ##
     ## Block unauthorized domains from accessing ##
@@ -107,8 +105,6 @@ get '/' do
     ## This further protects the core functionality of the app ##
     halt 401, 'Unauthorized Params' unless params && params.has_key?('email')
 
-  else
-    return "test"
   end ## debug
 
   ## Create customer ##
