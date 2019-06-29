@@ -60,11 +60,15 @@ get '/' do
 
   ## Create customer ##
   ## This allows us to create a new customer and pass their details back to the front-end JS ##
-  @customer = Bigcommerce::Customer.create(
-    first_name: 'Karl',
-    last_name: 'The Frog',
-    email: "eab284fbd0@example.com"
-  )
+  begin
+    @customer = Bigcommerce::Customer.create(
+      first_name: 'Karl',
+      last_name: 'The Frog',
+      email: "eab284fbd0@example.com"
+    )
+  catch Bigcommerce::BadRequest => e
+      e[:message]
+  end
 
   @customer.inspect()
   #@customer.status == 200 ? "#{@customer.email} created successfully" : "error"
