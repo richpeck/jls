@@ -66,7 +66,8 @@ get '/' do
     email: "#{SecureRandom.hex(5)}@example.com"
   )
 
-  @customer.status == 200 ? "#{@customer.email} created successfully" : "error"
+  @customer.inspect()
+  #@customer.status == 200 ? "#{@customer.email} created successfully" : "error"
 
 end
 
