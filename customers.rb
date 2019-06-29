@@ -50,7 +50,7 @@ post '/' do
   ## Params ##
   ## Only allow processes with certain params ##
   ## This further protects the core functionality of the app ##
-  hal 401, 'Unauthorized' unless params && params.key? 'email'
+  hal 401, 'Unauthorized' unless params && params.key?('email')
 
   ## Create customer ##
   ## This allows us to create a new customer and pass their details back to the front-end JS ##
