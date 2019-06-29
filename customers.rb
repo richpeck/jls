@@ -50,10 +50,9 @@ set :show_exceptions, true if debug
 ##########################################################
 ##########################################################
 
-def bc_handle_exception
-  yield
-rescue => error
-  halt 401, error.inspect()
+## Exception Handling ##
+error Bigcommerce::BadRequest do
+  env['sinatra.error'].message
 end
 
 ##########################################################
