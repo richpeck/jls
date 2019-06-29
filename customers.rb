@@ -67,7 +67,7 @@ get '/' do
       email: "eab284fbd0@example.com"
     )
   rescue Bigcommerce::BadRequest => e
-      e.inspect()
+      "Error""
   end
 
   @customer.inspect()
