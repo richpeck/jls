@@ -30,7 +30,7 @@ Sinatra::Application.register Sinatra::RespondTo
 ## Definitions ##
 ## Any variables defined here ##
 domain = "jlsmobility.co.uk"
-debug  = ENV.fetch("DEBUG", false) != false
+debug  = ENV.fetch("DEBUG", false) != false ## this needs to be evaluated this way because each ENV variable returns a string ##
 
 ## Config ##
 ## Allows us to configure the BigCommerce plugin to use the appropriate store data ##
@@ -41,8 +41,48 @@ Bigcommerce.configure do |config|
   config.access_token  = ENV.fetch("ACCESS_TOKEN")
 end
 
+##########################################################
+##########################################################
+
 ## Options ##
 set :show_exceptions, true if debug
+
+##########################################################
+##########################################################
+
+def bc_handle_exception
+  yield
+rescue Bigcommerce::BadRequest => e
+  puts e.inspect
+rescue Bigcommerce::Unauthorized => e
+  halt e.inspect
+rescue Bigcommerce::Forbidden => e
+  puts e.inspect
+rescue Bigcommerce::NotFound => e
+  puts e.inspect
+rescue Bigcommerce::MethodNotAllowed => e
+  puts e.inspect
+rescue Bigcommerce::NotAccepted => e
+  puts e.inspect
+rescue Bigcommerce::TimeOut => e
+  puts e.inspect
+rescue Bigcommerce::ResourceConflict => e
+  puts e.inspect
+rescue Bigcommerce::TooManyRequests => e
+  puts e.inspect
+rescue Bigcommerce::InternalServerError => e
+  puts e.inspect
+rescue Bigcommerce::BadGateway => e
+  puts e.inspect
+rescue Bigcommerce::ServiceUnavailable => e
+  puts e.inspect
+rescue Bigcommerce::GatewayTimeout => e
+  puts e.inspect
+rescue Bigcommerce::BandwidthLimitExceeded => e
+  puts e.inspect
+rescue StandardError => e
+  puts "Some other Error #{e.inspect}"
+end
 
 ##########################################################
 ##########################################################
@@ -63,7 +103,7 @@ get '/' do
 
   ## Debug ##
   ## Allows us to test and get responses without data ##
-  unless debug ## this needs to be evaluated this way because each ENV variable returns a string ##
+  unless debug
 
     ## Request ##
     ## Block unauthorized domains from accessing ##
@@ -80,7 +120,9 @@ get '/' do
 
   ## Create customer ##
   ## This allows us to create a new customer and pass their details back to the front-end JS ##
-  @customer = Bigcommerce::Customer.create(first_name: 'Karl', last_name: 'The Frog', email: "eab284fbd0@example.com")
+  bc_handle_exception do
+    @customer = Bigcommerce::Customer.create(first_name: 'Karl', last_name: 'The Frog', email: "eab284fbd0@example.com")
+  end
 
   ## Response ##
   ## Only respond to JS (unless in debug mode) ##
