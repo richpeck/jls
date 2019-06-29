@@ -116,35 +116,35 @@ get '/' do
   def bc_handle_exception
     @customer = Bigcommerce::Customer.create(first_name: 'Karl', last_name: 'The Frog', email: "eab284fbd0@example.com")
   rescue Bigcommerce::BadRequest => e
-    e.inspect()
+    puts e.inspect()
   rescue Bigcommerce::Unauthorized => e
-    e.inspect()
+    puts e.inspect()
   rescue Bigcommerce::Forbidden => e
-    e.inspect()
+    puts e.inspect()
   rescue Bigcommerce::NotFound => e
-    e.inspect()
+    puts e.inspect()
   rescue Bigcommerce::MethodNotAllowed => e
-    e.inspect()
+    puts e.inspect()
   rescue Bigcommerce::NotAccepted => e
-    e.inspect()
+    puts e.inspect()
   rescue Bigcommerce::TimeOut => e
-    e.inspect()
+    puts e.inspect()
   rescue Bigcommerce::ResourceConflict => e
-    e.inspect()
+    puts e.inspect()
   rescue Bigcommerce::TooManyRequests => e
-    e.inspect()
+    puts e.inspect()
   rescue Bigcommerce::InternalServerError => e
-    e.inspect()
+    puts e.inspect()
   rescue Bigcommerce::BadGateway => e
-    e.inspect()
+    puts e.inspect()
   rescue Bigcommerce::ServiceUnavailable => e
-    e.inspect()
+    puts e.inspect()
   rescue Bigcommerce::GatewayTimeout => e
-    e.inspect()
+    puts e.inspect()
   rescue Bigcommerce::BandwidthLimitExceeded => e
-    e.inspect()
+    puts e.inspect()
   rescue StandardError => e
-    return "Some other Error #{e.inspect}"
+    puts "Some other Error #{e.inspect}"
   end
 
 end
