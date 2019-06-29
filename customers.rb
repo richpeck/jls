@@ -54,7 +54,7 @@ get '/' do
     ## Params ##
     ## Only allow processes with certain params ##
     ## This further protects the core functionality of the app ##
-    halt 401, 'Unauthorized PArams' unless params && params.has_key?('email')
+    halt 401, 'Unauthorized Params' unless params && params.has_key?('email')
 
   end ## debug
 
@@ -66,7 +66,7 @@ get '/' do
       last_name: 'The Frog',
       email: "eab284fbd0@example.com"
     )
-  rescue Bigcommerce::BadRequest => e
+  rescue
       return "Error"
   end
 
