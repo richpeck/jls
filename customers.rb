@@ -58,7 +58,7 @@ error Bigcommerce::BadRequest do
   message = JSON.parse(env['sinatra.error'].message.to_s)
   test = OpenStruct.new message.first
   #test.status.to_s
-  test.inspect()
+  test
 end
 
 ##########################################################
