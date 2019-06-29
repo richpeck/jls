@@ -39,7 +39,7 @@ end
 ## Actions ##
 ## This allows us to accept inbound requests from the Internet ##
 ## Obviously, we also have to balance it against the
-post '/' do
+get '/' do
 
   ## Request ##
   ## Block unauthorized domains from accessing ##
