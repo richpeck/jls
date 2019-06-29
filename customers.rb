@@ -52,8 +52,8 @@ end
 
 ## Exception Handling ##
 error Bigcommerce::BadRequest do
-  message = JSON.parse env['sinatra.error'].message[0]
-  message['status']
+  message = JSON.parse env['sinatra.error'].message
+  message['status'] 
 end
 
 ##########################################################
