@@ -51,35 +51,35 @@ end
 def bc_handle_exception
   yield
 rescue Bigcommerce::BadRequest => e
-  puts e.inspect
+  return e.inspect
 rescue Bigcommerce::Unauthorized => e
-  puts e.inspect
+  return e.inspect
 rescue Bigcommerce::Forbidden => e
-  puts e.inspect
+  return e.inspect
 rescue Bigcommerce::NotFound => e
-  puts e.inspect
+  return e.inspect
 rescue Bigcommerce::MethodNotAllowed => e
-  puts e.inspect
+  return e.inspect
 rescue Bigcommerce::NotAccepted => e
-  puts e.inspect
+  return e.inspect
 rescue Bigcommerce::TimeOut => e
-  puts e.inspect
+  return e.inspect
 rescue Bigcommerce::ResourceConflict => e
-  puts e.inspect
+  return e.inspect
 rescue Bigcommerce::TooManyRequests => e
-  puts e.inspect
+  return e.inspect
 rescue Bigcommerce::InternalServerError => e
-  puts e.inspect
+  return e.inspect
 rescue Bigcommerce::BadGateway => e
-  puts e.inspect
+  return e.inspect
 rescue Bigcommerce::ServiceUnavailable => e
-  puts e.inspect
+  return e.inspect
 rescue Bigcommerce::GatewayTimeout => e
-  puts e.inspect
+  return e.inspect
 rescue Bigcommerce::BandwidthLimitExceeded => e
-  puts e.inspect
+  return e.inspect
 rescue StandardError => e
-  puts "Some other Error #{e.inspect}"
+  return "Some other Error #{e.inspect}"
 end
 
 ##########################################################
