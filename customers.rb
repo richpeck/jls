@@ -43,7 +43,7 @@ get '/' do
 
   ## Debug ##
   ## Allows us to test and get responses without data ##
-  if !ENV["debug"]
+  if !ENV["DEBUG"]
 
     ## Request ##
     ## Block unauthorized domains from accessing ##
