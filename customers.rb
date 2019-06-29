@@ -107,6 +107,8 @@ get '/' do
     ## This further protects the core functionality of the app ##
     halt 401, 'Unauthorized Params' unless params && params.has_key?('email')
 
+  else
+    return "test"
   end ## debug
 
   ## Create customer ##
