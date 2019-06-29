@@ -66,7 +66,7 @@ get '/' do
       last_name: 'The Frog',
       email: "eab284fbd0@example.com"
     )
-  catch Bigcommerce::BadRequest => e
+  rescue Bigcommerce::BadRequest => e
       e[:message]
   end
 
