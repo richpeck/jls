@@ -12,10 +12,17 @@
 
 ## Sinatra ##
 require 'sinatra'
+require 'sinatra/respond_to'
 
 ## BigCommerce ##
 require 'bigcommerce'
 require 'securerandom'
+
+##########################################################
+##########################################################
+
+## Integrations ##
+Sinatra::Application.register Sinatra::RespondTo
 
 ##########################################################
 ##########################################################
@@ -45,46 +52,6 @@ end
 ##########################################################
 ##########################################################
 
-## Exception Management ##
-## Allows us to capture the errors raised by BC ##
-## https://github.com/bigcommerce/bigcommerce-api-ruby/blob/master/examples/exception_handling.rb ##
-def bc_handle_exception
-  yield
-rescue Bigcommerce::BadRequest => e
-  return @customer = e
-rescue Bigcommerce::Unauthorized => e
-  return @customer = e
-rescue Bigcommerce::Forbidden => e
-  return @customer = e
-rescue Bigcommerce::NotFound => e
-  return @customer = e
-rescue Bigcommerce::MethodNotAllowed => e
-  return @customer = e
-rescue Bigcommerce::NotAccepted => e
-  return @customer = e
-rescue Bigcommerce::TimeOut => e
-  return @customer = e
-rescue Bigcommerce::ResourceConflict => e
-  return @customer = e
-rescue Bigcommerce::TooManyRequests => e
-  return @customer = e
-rescue Bigcommerce::InternalServerError => e
-  return @customer = e
-rescue Bigcommerce::BadGateway => e
-  return @customer = e
-rescue Bigcommerce::ServiceUnavailable => e
-  return @customer = e
-rescue Bigcommerce::GatewayTimeout => e
-  return @customer = e
-rescue Bigcommerce::BandwidthLimitExceeded => e
-  return @customer = e
-rescue StandardError => e
-  return "Some other Error #{e.inspect}"
-end
-
-##########################################################
-##########################################################
-
 ## Actions ##
 ## This allows us to accept inbound requests from the Internet ##
 ## Obviously, we also have to balance it against the
@@ -109,50 +76,17 @@ get '/' do
 
   ## Create customer ##
   ## This allows us to create a new customer and pass their details back to the front-end JS ##
-  #@customer = Bigcommerce::Customer.create(first_name: 'Karl', last_name: 'The Frog', email: "eab284fbd0@example.com")
-  #@customer.inspect()
-  #@customer.status == 200 ? "#{@customer.email} created successfully" : "error"
+  @customer = Bigcommerce::Customer.create(first_name: 'Karl', last_name: 'The Frog', email: "eab284fbd0@example.com")
 
-  def bc_handle_exception
-    @customer = Bigcommerce::Customer.create(first_name: 'Karl', last_name: 'The Frog', email: "eab284fbd0@example.com")
-  rescue Bigcommerce::BadRequest => e
-    puts e.inspect()
-  rescue Bigcommerce::Unauthorized => e
-    puts e.inspect()
-  rescue Bigcommerce::Forbidden => e
-    puts e.inspect()
-  rescue Bigcommerce::NotFound => e
-    puts e.inspect()
-  rescue Bigcommerce::MethodNotAllowed => e
-    puts e.inspect()
-  rescue Bigcommerce::NotAccepted => e
-    puts e.inspect()
-  rescue Bigcommerce::TimeOut => e
-    puts e.inspect()
-  rescue Bigcommerce::ResourceConflict => e
-    puts e.inspect()
-  rescue Bigcommerce::TooManyRequests => e
-    puts e.inspect()
-  rescue Bigcommerce::InternalServerError => e
-    puts e.inspect()
-  rescue Bigcommerce::BadGateway => e
-    puts e.inspect()
-  rescue Bigcommerce::ServiceUnavailable => e
-    puts e.inspect()
-  rescue Bigcommerce::GatewayTimeout => e
-    puts e.inspect()
-  rescue Bigcommerce::BandwidthLimitExceeded => e
-    puts e.inspect()
-  rescue StandardError => e
-    puts "Some other Error #{e.inspect}"
+  ## Response ##
+  ## Only respond to JS (unless in debug mode) ##
+  respond_to do |wants|
+    wants.html    { @customer.inspect() } # => views/post.html.haml, also sets content_type to text/html
+    wants.xml     { @post.to_xml }        # => sets content_type to application/xml
+    wants.js      { erb :post }           # => views/post.js.erb, also sets content_type to application/javascript
   end
 
 end
-
-##########################################################
-##########################################################
-
-
 
 ##########################################################
 ##########################################################
