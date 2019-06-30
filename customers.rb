@@ -109,7 +109,7 @@ post '/' do
     ## Block unauthorized domains from accessing ##
     ## This means that any referral (link clicks) that don't come from the domain are denied) ##
     ## Only requests themselves (IE NOT referrers) from the domain will be accepted ##
-    halt 401, "Unauthorized Domain (#{request.referrer} #{URI:HTTPS.build(host: domain)})" unless request.referrer == domain
+    halt 401, "Unauthorized Domain (#{URI:HTTPS.build(host: domain)})" unless referrer.domain == domain
 
     ## Params ##
     ## Only allow processes with certain params ##
