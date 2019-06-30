@@ -20,7 +20,8 @@ require 'bigcommerce'
 require 'securerandom'
 
 ## Extra ##
-require 'net/https' # => URL::HTTPS core
+require 'net/https' # => URL::HTTPS core (for creating URL out of naked domain)
+require "addressable/uri" # => Addressable::URI (break down URL into components // for request.referrer - https://github.com/sporkmonger/addressable#example-usage)
 
 ##########################################################
 ##########################################################
@@ -33,8 +34,9 @@ Sinatra::Application.register Sinatra::RespondTo
 
 ## Definitions ##
 ## Any variables defined here ##
-domain = "jlsmobility.co.uk"
-debug  = ENV.fetch("DEBUG", false) != false ## this needs to be evaluated this way because each ENV variable returns a string ##
+domain   = "jlsmobility.co.uk"
+referrer = Addressable::URI.parse(request.referrer)
+debug    = ENV.fetch("DEBUG", false) != false ## this needs to be evaluated this way because each ENV variable returns a string ##
 
 ## Config ##
 ## Allows us to configure the BigCommerce plugin to use the appropriate store data ##
@@ -107,7 +109,7 @@ post '/' do
     ## Block unauthorized domains from accessing ##
     ## This means that any referral (link clicks) that don't come from the domain are denied) ##
     ## Only requests themselves (IE NOT referrers) from the domain will be accepted ##
-    halt 401, "Unauthorized Domain (#{request.referrer})" unless request.referrer == domain
+    halt 401, "Unauthorized Domain (#{request.referrer} #{URI:HTTPS.build(host: domain)})" unless request.referrer == domain
 
     ## Params ##
     ## Only allow processes with certain params ##
