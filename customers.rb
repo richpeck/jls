@@ -55,7 +55,7 @@ set :assume_xhr_is_js, true ## respond_to
 
 ## CORS ##
 ## Only allow requests from domain ##
-set :allow_origin,   "https://jlsmobility.co.uk"
+set :allow_origin,   URI::HTTPS.build host: domain
 set :allow_methods,  "POST"
 set :allow_headers,  "content-type,if-modified-since"
 set :expose_headers, "location,link"
@@ -112,7 +112,7 @@ post '/' do
     ## Block unauthorized domains from accessing ##
     ## This means that any referral (link clicks) that don't come from the domain are denied) ##
     ## Only requests themselves (IE NOT referrers) from the domain will be accepted ##
-    halt 401, "Unauthorized Domain (#{referrer.domain})" if referrer.domain == domain
+    halt 401, "Unauthorized Domain (#{referrer.domain})" unless referrer.domain == domain
 
     ## Params ##
     ## Only allow processes with certain params ##
