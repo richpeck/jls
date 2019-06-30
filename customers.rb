@@ -124,7 +124,7 @@ post '/' do
 
   ## Create customer ##
   ## This allows us to create a new customer and pass their details back to the front-end JS ##
-  @customer = Bigcommerce::Customer.create(first_name: params[:first_name], last_name: params[:last_name], email: params[:email])
+  @customer = Bigcommerce::Customer.create(first_name: params[:first_name], last_name: params[:last_name], email: params[:email], customer_group_id: 2)
 
   ## Response ##
   ## Only respond to JS (unless in debug mode) ##
