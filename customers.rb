@@ -35,7 +35,7 @@ Sinatra::Application.register Sinatra::RespondTo
 ## Definitions ##
 ## Any variables defined here ##
 domain   = "jlsmobility.co.uk"
-#referrer = Addressable::URI.parse(request.referrer)
+referrer = Addressable::URI.parse(request.referrer)
 debug    = ENV.fetch("DEBUG", false) != false ## this needs to be evaluated this way because each ENV variable returns a string ##
 
 ## Config ##
@@ -105,13 +105,11 @@ post '/' do
   ## Allows us to test and get responses without data ##
   unless debug
 
-    URI::HTTPS.build(host: domain)
-
     ## Request ##
     ## Block unauthorized domains from accessing ##
     ## This means that any referral (link clicks) that don't come from the domain are denied) ##
     ## Only requests themselves (IE NOT referrers) from the domain will be accepted ##
-    halt 401, "Unauthorized Domain (#{request.referrer})" unless request.referrer == domain
+    halt 401, "Unauthorized Domain (#{referrer.domain})" unless request.referrer == domain
 
     ## Params ##
     ## Only allow processes with certain params ##
