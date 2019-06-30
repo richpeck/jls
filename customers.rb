@@ -101,7 +101,7 @@ end
 ## Obviously, we also have to balance it against the
 post '/' do
 
-  logger.info URI::HTTPS.build(host: domain) # STDOUT logger is used
+  logger.info URI::HTTPS.build(host: domain).to_s # STDOUT logger is used
 
   ## Debug ##
   ## Allows us to test and get responses without data ##
