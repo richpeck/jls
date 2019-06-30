@@ -79,7 +79,7 @@ error Bigcommerce::BadRequest do
   ## Response ##
   respond_to do |wants|
     wants.html { message["details"]["invalid_reason"] } # => bare message
-    wants.js   { message.inspect() } # => bare message
+    wants.js   { message["message"] } # => bare message
   end
 
 end
