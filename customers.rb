@@ -103,7 +103,7 @@ post '/' do
   ## Allows us to test and get responses without data ##
   unless debug
 
-    request.host
+    request.origin
 
     ## Request ##
     ## Block unauthorized domains from accessing ##
