@@ -103,6 +103,8 @@ post '/' do
   ## Allows us to test and get responses without data ##
   unless debug
 
+    request.referrer
+
     ## Request ##
     ## Block unauthorized domains from accessing ##
     ## This means that any referral (link clicks) that don't come from the domain are denied) ##
