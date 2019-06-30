@@ -50,7 +50,7 @@ end
 ##########################################################
 
 ## Options ##
-set :show_exceptions, true if debug
+#set :show_exceptions, true if debug
 set :assume_xhr_is_js, true ## respond_to
 
 ## CORS ##
