@@ -108,13 +108,11 @@ post '/' do
     ## Because this has to operate with "request", needs to be declared here ##
     referrer = Addressable::URI.parse(request.referrer)
 
-    referrer.domain.to_s 
-
     ## Request ##
     ## Block unauthorized domains from accessing ##
     ## This means that any referral (link clicks) that don't come from the domain are denied) ##
     ## Only requests themselves (IE NOT referrers) from the domain will be accepted ##
-    halt 401, "Unauthorized Domain (#{referrer.domain})" unless referrer.domain == domain
+    halt 401, "Unauthorized Domain (#{referrer.domain})" if referrer.domain == domain
 
     ## Params ##
     ## Only allow processes with certain params ##
