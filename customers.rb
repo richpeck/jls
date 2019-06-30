@@ -56,7 +56,7 @@ set :logger, Logger.new(STDOUT) ## logger
 
 ## CORS ##
 ## Only allow requests from domain ##
-set :allow_origin,   'https://jlsmobility.co.uk'
+set :allow_origin,   URI::HTTPS.build(host: domain).to_s
 set :allow_methods,  "POST"
 set :allow_headers,  "content-type,if-modified-since"
 set :expose_headers, "location,link"
@@ -100,8 +100,6 @@ end
 ## This allows us to accept inbound requests from the Internet ##
 ## Obviously, we also have to balance it against the
 post '/' do
-
-  logger.info URI::HTTPS.build(host: domain).to_s # STDOUT logger is used
 
   ## Debug ##
   ## Allows us to test and get responses without data ##
