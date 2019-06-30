@@ -112,7 +112,7 @@ post '/' do
     ## Params ##
     ## Only allow processes with certain params ##
     ## This further protects the core functionality of the app ##
-    halt 401, 'Missing Params' unless params.has_key?('email') && params[:email].present?
+    halt 400, 'Missing Params' unless params.has_key?('email') && params[:email].present?
 
   end ## debug
 
