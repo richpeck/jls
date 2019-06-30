@@ -78,7 +78,7 @@ error Bigcommerce::BadRequest do
 
   ## Response ##
   respond_to do |wants|
-    wants.html { message["message"] } # => bare message
+    wants.html { message.inspect() } # => bare message
     wants.js   { message.inspect() } # => bare message
   end
 
