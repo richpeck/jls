@@ -13,13 +13,14 @@
 ## Sinatra ##
 require 'sinatra'
 require 'sinatra/respond_to'
+require 'sinatra/cors'
 
 ## BigCommerce ##
 require 'bigcommerce'
 require 'securerandom'
 
 ## Extra ##
-require "ostruct"
+require 'net/https' # => URL::HTTPS core
 
 ##########################################################
 ##########################################################
@@ -51,6 +52,13 @@ end
 set :show_exceptions, true if debug
 set :assume_xhr_is_js, true ## respond_to
 
+## CORS ##
+## Only allow requests from domain ##
+set :allow_origin,   URI::HTTPS.build(host: domain)
+set :allow_methods,  "POST"
+set :allow_headers,  "content-type,if-modified-since"
+set :expose_headers, "location,link"
+
 ##########################################################
 ##########################################################
 
@@ -68,8 +76,8 @@ error Bigcommerce::BadRequest do
 
   ## Response ##
   respond_to do |wants|
-    wants.html    { message["message"] } # => bare message
-    wants.js      { message["message"] } # => bare message
+    wants.html { message["message"] } # => bare message
+    wants.js   { message["message"] } # => bare message
   end
 
 end
@@ -115,8 +123,8 @@ post '/' do
   ## Response ##
   ## Only respond to JS (unless in debug mode) ##
   respond_to do |wants|
-    wants.html    { @customer.inspect() } # => views/post.html.haml, also sets content_type to text/html
-    wants.js      { erb :post }           # => views/post.js.erb, also sets content_type to application/javascript
+    wants.html { @customer.inspect() } # => views/post.html.haml, also sets content_type to text/html
+    wants.js   { erb :post }           # => views/post.js.erb, also sets content_type to application/javascript
   end
 
 end
