@@ -54,7 +54,7 @@ set :assume_xhr_is_js, true ## respond_to
 
 ## CORS ##
 ## Only allow requests from domain ##
-set :allow_origin,   URI::HTTPS.build(host: domain)
+set :allow_origin,   "https://jlsmobility.co.uk"
 set :allow_methods,  "POST"
 set :allow_headers,  "content-type,if-modified-since"
 set :expose_headers, "location,link"
