@@ -105,6 +105,8 @@ post '/' do
   ## Allows us to test and get responses without data ##
   unless debug
 
+    URI:HTTPS.build(host: domain)
+
     ## Request ##
     ## Block unauthorized domains from accessing ##
     ## This means that any referral (link clicks) that don't come from the domain are denied) ##
