@@ -34,7 +34,7 @@ Sinatra::Application.register Sinatra::RespondTo
 
 ## Definitions ##
 ## Any variables defined here ##
-domain   = "jlsmobility.co.uk"
+domain   = ENV.fetch('DOMAIN', 'jlsmobility.co.uk')
 debug    = ENV.fetch("DEBUG", false) != false ## this needs to be evaluated this way because each ENV variable returns a string ##
 
 ## Config ##
@@ -86,12 +86,12 @@ end
 
 ##########################################################
 ##########################################################
-##                  _     _ _                           ##
-##                 | |   (_) |                          ##
-##                 | |    _| |__  ___                   ##
-##                 | |   | | '_ \/ __|                  ##
-##                 | |___| | |_) \__ \                  ##
-##                 \_____/_|_.__/|___/                  ##
+##                _____           _                     ##
+##               /  __ \         | |                    ##
+##               | /  \/ ___   __| | ___                ##
+##               | |    / _ \ / _` |/ _ \               ##
+##               | \__/\ (_) | (_| |  __/               ##
+##               \_____/\___/ \__,_|\___|               ##
 ##                                                      ##
 ##########################################################
 ##########################################################
