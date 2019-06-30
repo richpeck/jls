@@ -49,20 +49,29 @@ end
 
 ## Options ##
 #set :show_exceptions, true if debug
+set :assume_xhr_is_js, true ## respond_to
 
 ##########################################################
 ##########################################################
 
 ## Exception Handling ##
+## This allows us to manage what is seen on the site in case of an error ##
+## Not really needed, but is good to work with Sinatra ##
 error Bigcommerce::BadRequest do
 
   ## Data ##
   message = JSON.parse(env['sinatra.error'].message.to_s)
   message = message.first
 
+  ## Status ##
+  status message["status"]
+
   ## Response ##
-  status message["status"] ## Status
-  message["message"] ## Message
+  respond_to do |wants|
+    wants.html    { message["message"] } # => bare message
+    wants.js      { message["message"] } # => bare message
+  end
+
 end
 
 ##########################################################
@@ -107,7 +116,6 @@ get '/' do
   ## Only respond to JS (unless in debug mode) ##
   respond_to do |wants|
     wants.html    { @customer.inspect() } # => views/post.html.haml, also sets content_type to text/html
-    wants.xml     { @post.to_xml }        # => sets content_type to application/xml
     wants.js      { erb :post }           # => views/post.js.erb, also sets content_type to application/javascript
   end
 
