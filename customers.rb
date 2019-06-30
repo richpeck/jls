@@ -105,7 +105,7 @@ post '/' do
   ## Allows us to test and get responses without data ##
   unless debug
 
-    URI:HTTPS.build(host: domain)
+    URI::HTTPS.build(host: domain)
 
     ## Request ##
     ## Block unauthorized domains from accessing ##
