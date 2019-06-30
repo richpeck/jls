@@ -103,13 +103,11 @@ post '/' do
   ## Allows us to test and get responses without data ##
   unless debug
 
-    request.origin
-
     ## Request ##
     ## Block unauthorized domains from accessing ##
     ## This means that any referral (link clicks) that don't come from the domain are denied) ##
     ## Only requests themselves (IE NOT referrers) from the domain will be accepted ##
-    halt 401, 'Unauthorized Domain' unless request.host == domain
+    #halt 401, 'Unauthorized Domain' unless request.host == domain
 
     ## Params ##
     ## Only allow processes with certain params ##
