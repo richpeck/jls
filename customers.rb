@@ -108,6 +108,8 @@ post '/' do
     ## Because this has to operate with "request", needs to be declared here ##
     referrer = Addressable::URI.parse(request.referrer)
 
+    referrer 
+
     ## Request ##
     ## Block unauthorized domains from accessing ##
     ## This means that any referral (link clicks) that don't come from the domain are denied) ##
