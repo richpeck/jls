@@ -48,7 +48,7 @@ end
 ##########################################################
 
 ## Options ##
-#set :show_exceptions, true if debug
+set :show_exceptions, true if debug
 set :assume_xhr_is_js, true ## respond_to
 
 ##########################################################
@@ -89,7 +89,7 @@ end
 ## Actions ##
 ## This allows us to accept inbound requests from the Internet ##
 ## Obviously, we also have to balance it against the
-get '/' do
+post '/' do
 
   ## Debug ##
   ## Allows us to test and get responses without data ##
