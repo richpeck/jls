@@ -129,8 +129,8 @@ post '/' do
   ## Response ##
   ## Only respond to JS (unless in debug mode) ##
   respond_to do |wants|
-    wants.html { @customer.inspect() } # => views/post.html.haml, also sets content_type to text/html
-    wants.js   { erb :post }           # => views/post.js.erb, also sets content_type to application/javascript
+    wants.html { @customer.login_token } # => views/post.html.haml, also sets content_type to text/html
+    wants.js   { @customer.login_token } # => views/post.js.erb, also sets content_type to application/javascript
   end
 
 end
