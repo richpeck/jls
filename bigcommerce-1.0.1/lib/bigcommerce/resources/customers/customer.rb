@@ -41,7 +41,7 @@ module Bigcommerce
         'jti' => SecureRandom.uuid,
         'operation' => 'customer_login',
         'store_hash' => config.store_hash,
-        'customer_id' => id
+        'customer_id' => id,
         'redirect_to' => '/checkout.php'
       }
 
