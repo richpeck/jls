@@ -65,7 +65,7 @@ module Bigcommerce
 
       def raw_request(method, path, params = {})
         client = params.delete(:connection) || Bigcommerce.api
-        puts client.inspect()
+        puts Bigcommerce.api #Bigcommerce::Connection.build(BigCommerce.config)
         client.send(method, path.to_s, params)
       end
 
