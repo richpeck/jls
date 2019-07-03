@@ -53,7 +53,7 @@ module Bigcommerce
     # This is used after we've created or invoked a customer, and allows us to push updated information about their custom preferences
     # Only accepts "name" / "value" with customer ID. If we have customer ID already, just means we have to send name/value data
     def push_custom_fields(params)
-      put "customers/form-field-values", params.merge(self[:id]) # => customer_id, name, value
+      put "customers/form-field-values", params.merge({customer_id: self[:id]}) # => customer_id, name, value
     end
 
   end
