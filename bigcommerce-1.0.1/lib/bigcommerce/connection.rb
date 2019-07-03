@@ -9,6 +9,7 @@ module Bigcommerce
 
     def self.build(config)
       ssl_options = config.ssl || {}
+      api_url = config.api_test || config.api_url
       Faraday.new(url: config.api_url, ssl: ssl_options) do |conn|
         conn.request :json
         conn.headers = HEADERS
