@@ -67,6 +67,7 @@ module Bigcommerce
       ## Send the payload ##
       ## Because this is V3, we need to make sure we're sending the correct data structure ##
       self.class.put "customers/form-field-values", new_params, true # => true sends to v3
+
     end
 
   end
