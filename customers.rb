@@ -131,7 +131,7 @@ post '/' do
   ## This is entirely dependent on the correct fields being present etc ##
   if params.has_key?('custom_fields') ## should look for keys other than first_name, last_name, email
     logger.info params[:custom_fields]
-    #@customer.push_custom_fields params.except('first_name', 'last_name', 'email')
+    #@customer.push_custom_fields params[:custom_fields]
   end
 
   ## Response ##

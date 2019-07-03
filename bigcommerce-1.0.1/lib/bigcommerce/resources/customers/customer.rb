@@ -52,8 +52,21 @@ module Bigcommerce
     # Gives us ability to upsert customer form_fields -- https://developer.bigcommerce.com/api-reference/customer-subscribers/v3-customers-api/customer-form-fields/customerformfieldvalueput
     # This is used after we've created or invoked a customer, and allows us to push updated information about their custom preferences
     # Only accepts "name" / "value" with customer ID. If we have customer ID already, just means we have to send name/value data
-    def push_custom_fields(params)
-      self.class.put "customers/form-field-values", params.merge({customer_id: self[:id]}) # => customer_id, name, value
+    def push_custom_fields(params = {})
+
+      ## Declaration ##
+      ## This allows us declare variables etc ##
+      new_params = []
+
+      ## Need to build custom fields ##
+      ## As system only accepts {"name": x, "value": y}, we need to change any of the sent items ##
+      params.each_pair do |name,value|
+        new_params.push({"customer_id": self[:id], "name": name, "value": value})
+      end
+
+      ## Send the payload ##
+      ## Because this is V3, we need to make sure we're sending the correct data structure ##
+      self.class.put "customers/form-field-values", new_params, true # => true sends to v3
     end
 
   end
