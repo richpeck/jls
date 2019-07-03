@@ -31,7 +31,6 @@ gem 'sinatra-cors', '~> 1.1' ## protect app via CORS
 # => Extras
 gem 'addressable', '~> 2.6' ## break down the various components of a domain
 gem 'bigcommerce', path: 'bigcommerce-1.0.1' ## BigCommerce API wrapper -- local version has changed /resources/customers/customer.rb to allow us to change the "redirect_to" value for customer_login
-gem 'activesupport' ## required for "except" hash function
 
 ###########################################
 ###########################################
