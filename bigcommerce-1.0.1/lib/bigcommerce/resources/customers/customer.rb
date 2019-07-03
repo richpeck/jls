@@ -47,5 +47,14 @@ module Bigcommerce
 
       JWT.encode(payload, config.client_secret, 'HS256')
     end
+
+    # RPECK 03/07/2019
+    # Gives us ability to upsert customer form_fields -- https://developer.bigcommerce.com/api-reference/customer-subscribers/v3-customers-api/customer-form-fields/customerformfieldvalueput
+    # This is used after we've created or invoked a customer, and allows us to push updated information about their custom preferences
+    # Only accepts "name" / "value" with customer ID. If we have customer ID already, just means we have to send name/value data
+    def push_custom_fields(params)
+      put "customers/form-field-values", params.merge(self[:id]) # => customer_id, name, value
+    end
+
   end
 end
