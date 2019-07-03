@@ -16,6 +16,7 @@ module Bigcommerce
 
     def configure
       @config = Bigcommerce::Config.new.tap { |h| yield(h) }
+      puts @config
       @api = Bigcommerce::Connection.build(@config)
     end
   end
