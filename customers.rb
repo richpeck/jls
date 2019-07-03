@@ -131,6 +131,7 @@ post '/' do
   ## If custom fields are present, send them to the server ##
   ## This is entirely dependent on the correct fields being present etc ##
   if params.except('first_name', 'last_name', 'email').length > 0 ## should look for keys other than first_name, last_name, email
+    Logger.info params.except('first_name', 'last_name', 'email')
     #@customer.push_custom_fields params.except('first_name', 'last_name', 'email')
   end
 
