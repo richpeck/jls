@@ -59,13 +59,14 @@ module Bigcommerce
       end
 
       def put(path, params = {}, v3=false)
-        response = raw_request(:put, path, params)
+        response = raw_request(:put, path, params, v3)
         build_response_object response
       end
 
-      def raw_request(method, path, params = {})
-        client = params.delete(:connection) || Bigcommerce.api
-        puts Bigcommerce.api #Bigcommerce::Connection.build(BigCommerce.config)
+      def raw_request(method, path, params = {}, v3=false)
+        client = v3 ? Bigcommerce::Connection.build(BigCommerce.config) : params.delete(:connection) || Bigcommerce.api
+        puts BigCommerce.config
+        puts client.inspect()
         client.send(method, path.to_s, params)
       end
 
