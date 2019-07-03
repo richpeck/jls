@@ -8,7 +8,7 @@ module Bigcommerce
       return url if auth == 'legacy'
 
       base = ENV.fetch('BC_API_ENDPOINT', DEFAULTS[:base_url])
-      "#{base}/stores/#{store_hash}/v2"
+      "#{base}/stores/#{store_hash}/v3"
     end
   end
 end
