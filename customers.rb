@@ -22,6 +22,7 @@ require 'securerandom'
 ## Extra ##
 require 'net/https' # => URL::HTTPS core (for creating URL out of naked domain)
 require "addressable/uri" # => Addressable::URI (break down URL into components // for request.referrer - https://github.com/sporkmonger/addressable#example-usage)
+require 'active_support/core_ext/hash' # => Required for the .except function on hashes
 
 ##########################################################
 ##########################################################
@@ -129,8 +130,8 @@ post '/' do
   ## Custom Fields ##
   ## If custom fields are present, send them to the server ##
   ## This is entirely dependent on the correct fields being present etc ##
-  if params.delete('first_name', 'last_name', 'email').length > 0 ## should look for keys other than first_name, last_name, email
-    @customer.push_custom_fields params
+  if params.except('first_name', 'last_name', 'email').length > 0 ## should look for keys other than first_name, last_name, email
+    @customer.push_custom_fields params.except('first_name', 'last_name', 'email')
   end
 
   ## Response ##
