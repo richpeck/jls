@@ -58,7 +58,7 @@ module Bigcommerce
         build_response_object response
       end
 
-      def put(path, params = {})
+      def put(path, params = {}, v3=false)
         response = raw_request(:put, path, params)
         build_response_object response
       end
