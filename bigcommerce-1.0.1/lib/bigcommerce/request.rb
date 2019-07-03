@@ -60,13 +60,12 @@ module Bigcommerce
 
       def put(path, params = {})
         response = raw_request(:put, path, params)
-        puts response
         build_response_object response
       end
 
       def raw_request(method, path, params = {})
         client = params.delete(:connection) || Bigcommerce.api
-        puts client
+        puts client.inspect()
         client.send(method, path.to_s, params)
       end
 
