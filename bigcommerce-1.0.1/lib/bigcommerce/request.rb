@@ -60,6 +60,7 @@ module Bigcommerce
 
       def put(path, params = {})
         response = raw_request(:put, path, params)
+        puts response
         build_response_object response
       end
 
