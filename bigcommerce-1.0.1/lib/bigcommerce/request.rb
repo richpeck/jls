@@ -64,7 +64,8 @@ module Bigcommerce
       end
 
       def raw_request(method, path, params = {}, v3=false)
-        client = v3 ? Bigcommerce::Connection.build(Bigcommerce.config.merge({"api_url":"test2"})) : params.delete(:connection) || Bigcommerce.api
+        puts Bigcommerce.config.api_url
+        client = v3 ? Bigcommerce::Connection.build(Bigcommerce.config.merge()) : params.delete(:connection) || Bigcommerce.api
         puts client.inspect()
         client.send(method, path.to_s, params)
       end
